@@ -1,0 +1,146 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="/loanz/clients/view">Clients</a></li>
+                <li class="breadcrumb-item active">Details</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <div *ngIf="client"> 
+      
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+
+              <div class="col-md-6">
+
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">{{client.personDto.lastName | uppercase}} {{client.personDto.firstName | uppercase}}
+                    ({{client.status | lowercase}})
+                  </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i> Personal Info</strong>
+          
+                  <p class="text-muted">
+                    <span>Email: {{ client.personDto.email}}</span><br>
+                    <span>Contact :0{{ client.userName}}</span><br>
+                    <span>Date of Birth :{{ client.personDto.dob}}</span><br>
+                    <span>Gender :{{ client.personDto.gender}}</span><br>
+                    <span>NIN :{{ client.personDto.nin}}</span><br>
+                    <span>Residence :{{ client.personDto.residence}}</span><br>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-map-marker-alt mr-1"></i> Work Info</strong>
+          
+                  <p class="text-muted">
+                    <span>Company :{{ client.workDto.companyName}}</span><br>
+                    <span>Salary :{{ client.workDto.basicSalary}}</span><br>
+                    <span>EmployeeId :{{ client.workDto.employeeId}}</span><br>
+                    <span>Job :{{ client.workDto.job}}</span><br>
+                    <span>T.O.E :{{ client.workDto.toe}}</span><br>
+                    <span>Work Station :{{ client.workDto.workStation}}</span><br>
+                    <span>Payroll Saving :{{ client.workDto.payrollSaving}}</span><br>
+                    <span>Payroll Shares :{{ client.workDto.payrollShares}}</span><br>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-pencil-alt mr-1"></i> Bank Info</strong>
+          
+                  <p class="text-muted">
+                    <span>Account Name :{{ client.bankDto.accountName}}</span><br>
+                    <span>Account Number :{{ client.bankDto.accountNumber}}</span><br>
+                    <span>Branch :{{ client.bankDto.branch}}</span><br>
+                    <span>Bank Name :{{ client.bankDto.name}}</span><br>
+
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="far fa-file-alt mr-1"></i> Next Of Kin</strong>
+          
+                  <p class="text-muted">
+                    <span>Name :{{ client.nextOfKinDto.name}}</span><br>
+                    <span>Contact :{{ client.nextOfKinDto.contact}}</span><br>
+                    <span>Relationship :{{ client.nextOfKinDto.relationship}}</span><br>
+                   </p>
+                   <hr>
+
+                   <button *ngIf="verifyBtn" type="button" id="verifyBtn" class="btn btn-primary" (click)="verify()">VERIFY</button>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              </div>
+
+              <div class="col-md-3">
+      
+    <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+
+        <h3 class="profile-username text-center">Accounts</h3>
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item">
+            <b>Member Number</b> <a class="float-right">{{client.accountDto.memberNo}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Position</b> <a class="float-right">{{client.accountDto.position}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Wallet</b> <a class="float-right">{{client.accountDto.walletAmount}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Savings</b> <a class="float-right">{{client.accountDto.totalSavings}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Shares</b> <a class="float-right">{{client.accountDto.totalShares}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Membership Bal</b> <a class="float-right">{{client.accountDto.pendingFee}}</a>
+          </li>
+        </ul>
+
+        
+      </div>
+    </div>
+    <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+
+        <h3 class="profile-username text-center">LOANZ</h3>
+
+        <p class="text-muted text-center">Outstanding loans</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item" *ngFor="let loan of loans" routerLink="/loanz/loan/repay/{{loan.loanId}}">
+            <b>{{loan.loanNumber}}</b> <a class="float-right">{{loan.due}}</a>
+          </li>
+        </ul>
+
+        
+      </div>
+    </div>
+
+  </div>
+      
+      </div>
+      </div>
+      </section>
+
+    </div>
+</div>

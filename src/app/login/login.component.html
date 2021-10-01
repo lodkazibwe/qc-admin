@@ -1,0 +1,62 @@
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+          <a href="../../index2.html"><b>qc</b>Sacco</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+          <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign in</p>
+      
+              <form #loginForm="ngForm" (ngSubmit)="submit(loginForm.value); loginForm.password='' " >
+              <div class="input-group mb-3">
+                <input required ngModel name="user" type="text" #user="ngModel" class="form-control" id="user" placeholder="User Name">
+                
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>  
+              </div>
+              <div class="alert alert-danger" *ngIf="user.touched && !user.valid">
+                <div *ngIf="user.errors.required">user name is required.</div> 
+              </div>
+              <div class="input-group mb-3">
+                <input required ngModel name="password" type="password" #password="ngModel" class="form-control" id="password" placeholder="Password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <span  *ngIf="password.touched && !password.valid">
+                <p class="text-danger" *ngIf="password.errors.required">password is required.</p> 
+              </span>
+              
+              <div class="row">
+                <div class="col-8">
+                  <div class="icheck-primary">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">
+                      Remember Me
+                    </label>
+                  </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-4">
+                  <button class="btn btn-primary btn-block" type="submit" id="submitBtn" [disabled]="!loginForm.valid">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+    
+        <p class="mb-1">
+          <a href="">I forgot my password</a>
+        </p>
+      
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+    </div>
+    <!-- /.login-box -->
+    </body>

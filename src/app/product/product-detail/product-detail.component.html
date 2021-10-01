@@ -1,0 +1,126 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="/loanz/product/all">Product</a></li>
+                <li class="breadcrumb-item active">Details</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <div *ngIf="product"> 
+      
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+
+              <div class="col-md-6">
+
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">#{{product.productNumber}} {{product.name}}</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i> Interest</strong>
+          
+                  <p class="text-muted">
+                    <span>{{product.interest}} %, of principal per month</span>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-map-marker-alt mr-1"></i>Charges</strong>
+          
+                  <p class="text-muted">
+                    <span>Handling Charge: {{product.handlingCharge}} % of principal</span><br>
+                    <span>Insurance Fee: {{product.insuranceRate}} % of principal </span>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-pencil-alt mr-1"></i> Limits</strong>
+          
+                  <p class="text-muted">
+                    <span>Maxmum Amount: {{product.maxAmount}}</span><br>
+                    <span>Minimum Amount: {{product.minAmount}}</span><br>
+                    <span>Maxmum Duration: {{product.maxDuration}} months</span><br>
+                    <span>Minimum Duration: {{product.minDuration}} months</span><br>
+                    <span>User Maxmum: {{product.maximum}} % of User Savings</span><br>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="far fa-file-alt mr-1"></i> Description</strong>
+          
+                  <p class="text-muted">
+                    <span>{{product.description}} </span>
+                   </p>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              </div>
+              <div class= "col-md-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 id="formTitle" class="card-title">Loan calc</h3>
+                  </div>
+              <form #calcForm="ngForm" (ngSubmit)="submit(calcForm.value);">
+                <div class="card-body">
+                    <!-- tab1 -->
+                  <div id="ltab1" class="tab">
+       
+                        <div class="form-group row">
+                          <label for="principal" class="col-sm-3 col-form-label">Principal</label>
+                          <div class="col-sm-9">
+                            <input required ngModel name="principal" type="number" #principal="ngModel" class="form-control" id="principal" placeholder="amount">
+                            <div class="alert alert-danger" *ngIf="principal.touched && !principal.valid">
+                              <div *ngIf="principal.errors.required">principal is required.</div> 
+                            </div>
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          
+                          <label for="duration" class="col-sm-3 col-form-label">Duration</label>
+                          <div class="col-sm-4">
+                            <input required  ngModel name="months" type="number" #months="ngModel" class="form-control" id="months" placeholder="Months">
+                            <div class="alert alert-danger" *ngIf="months.touched && !months.valid">
+                              <div *ngIf="months.errors.required">duration is required.</div> 
+                            </div>
+                          </div>
+                                                      
+       
+                        </div>
+              
+                  </div>
+                  <span *ngIf="fees">Principal: {{fees.principal}}</span><br>
+                  <span *ngIf="fees">Duration: {{fees.duration}}</span><br>
+                  <span *ngIf="fees">Interest: {{fees.interest}}</span><br>
+                  <span *ngIf="fees">Insurance fee: {{fees.insuranceFee}}</span><br>
+                  <span *ngIf="fees">Handling charge: {{fees.handlingCharge}}</span><br>
+                  <span *ngIf="fees">Monthly payment: {{fees.repayment}}</span>
+                  </div>
+                <div class="card-footer">
+                  <button class="btn btn-primary" type="submit" id="submitBtn" [disabled]="!calcForm.valid">Calculate</button>
+                </div>
+                  <!-- /.tab1 -->
+                  </form>
+                </div>
+                </div>
+      
+      </div>
+      </div>
+      </section>
+
+    </div>
+</div>

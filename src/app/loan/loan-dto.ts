@@ -1,0 +1,36 @@
+export interface LoanDto {
+    borrower: string,
+    disbursedBy: string,
+    duration: number,
+    firstRepaymentDate: string,
+    handlingMode: string,
+    principal: number,
+    productId: number,
+    remarks: string,
+    repaymentCycle: string,
+    repaymentMode: string,
+    topUpMode: string,
+    transferCharge: number,
+    loanNumber: string,
+    approvedBy: string,
+    preparedBy: string,
+    releaseDate: string,
+    topUpLoanBalance: number,
+    topUpLoanId: string,
+    totalDue: number,
+    totalPaid: number,
+    status: string,
+    penalty: string,
+    insuranceFee: number,
+    handlingCharge: string,
+    expressHandling: string,
+    earlyTopUpCharge: string,
+   applicationDate: string,
+    securityDto: {
+        description: string,
+        file: string,
+        guarantor: string,
+        id: number
+    }
+
+  }

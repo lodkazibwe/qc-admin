@@ -1,0 +1,197 @@
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Add new client</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="clients/add">Clients</a></li>
+                <li class="breadcrumb-item active">add</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      
+
+      <div class="row">
+      <div class="col-md-3"> </div>
+      <div class="col-md-6">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 id="formTitle" class="card-title">Personal info</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form #clientForm="ngForm" (ngSubmit)="submit(clientForm.value); clientForm.reset()">
+          <!-- <form #contactForm="ngForm" (ngSubmit)="submit(contactForm.value)"> -->
+          <div class="card-body">
+              <!-- tab1 -->
+            <div id="tab1" class="tab">
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                      <input required minlength="3" maxlength="10" ngModel name="firstName" type="text" #firstName="ngModel" class="form-control" id="firstName" placeholder="First Name">
+                      <div class="alert alert-danger small" *ngIf="firstName.touched && !firstName.valid">
+                        <div *ngIf="firstName.errors.required">First Name is required.</div>      
+                        <div *ngIf="firstName.errors.minlength">First Name is minimum {{ firstName.errors.minlength.requiredLength }} character.</div>          
+                        <div *ngIf="firstName.errors.maxlength">First Name is maximum 10 character.</div>    
+                    </div>  
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                      <input required maxlength="10" ngModel name="lastName" type="text" #lastName="ngModel" class="form-control" id="lastName" placeholder="Last Name">
+                      <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+                        <div *ngIf="lastName.errors.required">Last Name is required.</div> 
+                        <div *ngIf="lastName.errors.maxlength">Last Name is maximum 10 character.</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="nin" class="col-sm-3 col-form-label">NIN</label>
+                    <div class="col-sm-9">
+                      <input required minlength="14" ngModel name="nin" type="text" #nin="ngModel" class="form-control" id="nin" placeholder="NIN">
+                      <div class="alert alert-danger" *ngIf="nin.touched && !nin.valid">
+                        <div *ngIf="nin.errors.required">NIN is required.</div> 
+                        <div *ngIf="nin.errors.minlength">NIN should have 14 characters.</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="mobile" class="col-sm-3 col-form-label">Mobile</label>
+                    <div class="col-sm-9">
+                      <input required minlength="10" ngModel name="mobile" type="text" #mobile="ngModel" class="form-control" id="mobile" placeholder="Mobile">
+                      <div class="alert alert-danger" *ngIf="mobile.touched && !mobile.valid">
+                        <div *ngIf="mobile.errors.required">Mobile is required.</div> 
+                        <div *ngIf="mobile.errors.minlength">Mobile should have 10 characters.</div> 
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <!-- /.tab1 -->
+             <!-- tab2-->
+             <div id="tab2" class="tab">
+                  <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                      <input required email type="email" ngModel name="email" #email="ngModel" class="form-control" id="email" placeholder="Email">
+                      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                        <div *ngIf="email.errors.required">email is required.</div> 
+                        <div *ngIf="email.errors.email">email is incorrect.</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="residance" class="col-sm-3 col-form-label">Residence</label>
+                    <div class="col-sm-9">
+                      <input required minlength="3"type="text" ngModel name="residence" #residence="ngModel" class="form-control" id="residance" placeholder="Residence">
+                      <div class="alert alert-danger" *ngIf="residence.touched && !residence.valid">
+                        <div *ngIf="residence.errors.required">residance cannot be null</div> 
+                        <div *ngIf="residence.errors.minlength">residance min 3 characters</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="dob" class="col-sm-3 col-form-label">Date of Birth</label>
+                    <div class="col-sm-9">
+                      <input required pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
+                      type="date" ngModel name="dob" #dob="ngModel"  class="form-control" id="dob">
+                      <div class="alert alert-danger" *ngIf="dob.touched && !dob.valid">
+                        <div *ngIf="dob.errors.required">date is required.</div> 
+                        <div *ngIf="dob.errors.pattern">incorrect date format.</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                    <div class="col-sm-9">
+                      <select required ngModel name="gender" #gender="ngModel" class="form-control" id="gender" placeholder="select gender">
+                        <option disabled value="">select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="gender.touched && !gender.valid">
+                          <div *ngIf="gender.errors.required">gender cannot be empty</div> 
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <!-- /.tab2 -->
+            <!-- tab3-->
+            <div id="tab3" class="tab">
+                <div class="form-group row">
+                    <label for="company" class="col-sm-3 col-form-label">Company</label>
+                    <div class="col-sm-9">
+                      <input required type="text" ngModel name="company" #company="ngModel" class="form-control" id="company" placeholder="Company/Business">
+                      <div class="alert alert-danger" *ngIf="company.touched && !company.valid">
+                        <div *ngIf="company.errors.required">company cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="work" class="col-sm-3 col-form-label">Work Station</label>
+                    <div class="col-sm-9">
+                      <input required type="text" ngModel name="workStation" #workStation="ngModel" class="form-control" id="work" placeholder="Work Station">
+                      <div class="alert alert-danger" *ngIf="workStation.touched && !workStation.valid">
+                        <div *ngIf="workStation.errors.required">work station cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="job" class="col-sm-3 col-form-label">Job</label>
+                    <div class="col-sm-9">
+                      <input required type="text" ngModel name="job" #job="ngModel" class="form-control" id="job" placeholder="Job">
+                      <div class="alert alert-danger" *ngIf="job.touched && !job.valid">
+                        <div *ngIf="job.errors.required">job cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="salary" class="col-sm-3 col-form-label">Basic Salary</label>
+                    <div class="col-sm-9">
+                      <input required type="number" ngModel name="salary" #salary="ngModel" class="form-control" id="salary" placeholder="Basic Salary">
+                      <div class="alert alert-danger" *ngIf="salary.touched && !salary.valid">
+                        <div *ngIf="salary.errors.required">salary cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.tab3 -->
+
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <div style="float:left;">
+            <button *ngIf="prevBtn" type="button" class="btn btn-secondary" (click)="prevTab()">Previous</button>
+            </div>
+            <div style="float:right;">
+            <button *ngIf="nextBtn" type="button" id="nextBtn" class="btn btn-primary" (click)="nextTab()">Next</button>
+            <button *ngIf="submitBtn" class="btn btn-primary" type="submit" id="submitBtn" [disabled]="!clientForm.valid" >Submit</button>
+           </div>
+
+            <!-- Circles which indicates the steps of the form: -->
+             <div style="text-align:center;margin-top:10px;">
+                <span id="step1" class="step" ></span>
+                <span id="step2" class="step"></span>
+                <span id="step3" class="step"></span>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+
+

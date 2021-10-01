@@ -1,0 +1,76 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">User transactions</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <div class="form-group row">
+                <label for="user" class="col-sm-3 col-form-label">Select user</label>
+                <div class="col-sm-9">
+                <div class="input-group input-group-sm" style="width: 180px;">
+                  <input type="text" class="form-control float-right" list="userList"  name="user" [(ngModel)]='currentUser' (change)="onUserChanged(currentUser)" />
+                  <datalist id="userList">
+                    <option *ngFor="let user of users" [value]="user.mobile">{{user.lastName}} {{user.firstName}}</option>
+                </datalist>
+                </div>
+                </div>
+              </div>
+              
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+    
+      <div class="row">
+
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">USER-{{currentUser}}(transactions)</h3>
+    
+              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    
+                    <th>Date.</th>
+                    <th>Amount</th>
+                    <th>From</th>
+                    <th>TO</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let transaction of transactions">
+                   
+                    <td>{{transaction.date}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.acctFrom}}</td>
+                    <td>{{transaction.acctTo}}</td>
+                    <td>{{transaction.transactionType}}</td>
+                    <td>{{transaction.status}}</td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          
+        </div>
+      </div>
+    
+    
+    </div>
+    
+    

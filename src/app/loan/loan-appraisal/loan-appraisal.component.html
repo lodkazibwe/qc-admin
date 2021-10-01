@@ -1,0 +1,161 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Loan Appraisal Sheet</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="/loanz/clients/">Loan</a></li>
+                <li class="breadcrumb-item active">Appraisal</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <div *ngIf="appraisalSheet"> 
+      
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+
+              <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Outstanding Loans</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Product</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Next Due Date</th>
+                            <th>Next Due</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let loan of appraisalSheet.outstandingLoans">
+                            <td>{{loan.loanNumber}}</td>
+                            <td>{{loan.product}}</td>
+                            <td>{{loan.totalPaid}}</td>
+                            <td>{{loan.totalBalance}}</td>
+                            <td>{{loan.nextDueDate}}</td>
+                            <td>{{loan.nextDue}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+
+
+
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Loan Request Details</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i> Loan</strong>
+          
+                  <p class="text-muted">
+                    <span>Loan Amount:   {{ appraisalSheet.loanRequest.principal}}</span><br>
+                    <span>Interest to be earned:   {{ appraisalSheet.loanRequest.interest}}</span><br>
+                    <span>Period of repayment:   {{ appraisalSheet.loanRequest.duration}}months</span><br>
+                    <span>Repayment cycle:   {{ appraisalSheet.loanRequest.repaymentCycle}}</span><br>
+                    <span>Total amount to be repayed:   {{appraisalSheet.loanRequest.interest + appraisalSheet.loanRequest.principal }}</span><br>
+                    <span>Monthly repayment: {{(appraisalSheet.loanRequest.interest + appraisalSheet.loanRequest.principal)/appraisalSheet.loanRequest.duration }}</span><br>
+                    <span>Repayment mode:   {{ appraisalSheet.loanRequest.repaymentMode}}</span><br>
+                    <span>First repayment date:   {{ appraisalSheet.loanRequest.firstRepaymentDate}}</span><br>
+                    <span>Verified by:   0{{ appraisalSheet.loanRequest.preparedBy}}</span><br>
+                    <span>Approved by:   0{{ appraisalSheet.loanRequest.approvedBy}}</span>
+                </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-pencil-alt mr-1"></i> Charges</strong>
+          
+                  <p class="text-muted">
+                    <span>Handling Charge:   {{appraisalSheet.loanRequest.handlingCharge}}</span><br>
+                    <span>Insurance fee:   {{appraisalSheet.loanRequest.insuranceFee}}</span><br>
+                    <span>Top up loan balance:   {{appraisalSheet.loanRequest.topUpLoanBalance}}</span>
+                  </p>
+          
+                  <hr>
+          
+                  <strong><i class="fas fa-pencil-alt mr-1"></i> Net amount to be recieved</strong>
+          
+                  <p class="text-muted">
+                    <span>{{appraisalSheet.loanRequest.principal-appraisalSheet.loanRequest.topUpLoanBalance-appraisalSheet.loanRequest.insuranceFee-appraisalSheet.loanRequest.handlingCharge}}</span>
+
+                  </p>
+          
+                  <hr>
+                  <div *ngIf="verifyBtn">
+                    First repayment date:
+                  <div  class="input-group input-group-sm" style="width: 200px;">
+                    <input required pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
+                     type="date" [(ngModel)]="rdate" name="rdate" class="form-control float-right" placeholder="repayment Date" >
+      
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-primary"  (click)="verify(rdate)">VERIFY</button>
+                    </div>
+                  </div></div>
+                
+                  <button  *ngIf="approveBtn" type="button" id="approveBtn" class="btn btn-primary" (click)="approve()">APPROVE</button>
+                  <button  *ngIf="releaseBtn" type="button" id="releaseBtn" class="btn btn-primary" (click)="release()">RELEASE</button>
+                </div>
+                
+                <!-- /.card-body -->
+              </div>
+              </div>
+
+              <div class="col-md-3">
+      <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+
+        <h3 class="profile-username text-center">{{appraisalSheet.userDto.personDto.firstName}}
+            {{appraisalSheet.userDto.personDto.lastName}}
+        </h3>
+
+        <p class="text-muted text-center">0{{appraisalSheet.userDto.userName}} | {{appraisalSheet.userDto.accountDto.position}}</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item">
+            <b>Savings</b> <a class="float-right">{{appraisalSheet.userDto.accountDto.totalSavings}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Shares</b> <a class="float-right">{{appraisalSheet.userDto.accountDto.totalShares}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>company</b> <a class="float-right">{{appraisalSheet.userDto.workDto.companyName}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Salary</b> <a class="float-right">{{appraisalSheet.userDto.workDto.basicSalary}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Monthly Saving</b> <a class="float-right">{{appraisalSheet.userDto.workDto.payrollSaving}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Monthly Shares</b> <a class="float-right">{{appraisalSheet.userDto.workDto.payrollShares}}</a>
+          </li>
+          
+          
+        </ul>
+      </div>
+    </div></div>
+      
+      </div>
+      </div>
+      </section>
+
+    </div>
+</div>

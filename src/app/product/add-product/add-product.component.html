@@ -1,0 +1,190 @@
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Add new Loan Product</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="product/all">products</a></li>
+                <li class="breadcrumb-item active">add</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      
+
+      <div class="row">
+      <div class="col-md-3"> </div>
+      <div class="col-md-6">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 id="formTitle" class="card-title">Loan Product info</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <!-- form start -->
+        <form #productForm="ngForm" (ngSubmit)="submit(productForm.value); productForm.reset()">
+          <!-- <form #contactForm="ngForm" (ngSubmit)="submit(contactForm.value)"> -->
+          <div class="card-body">
+              <!-- tab1 -->
+            <div id="tab4" class="tab">
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Product Name</label>
+                    <div class="col-sm-9">
+                      <input required minlength="3" maxlength="10" ngModel name="name" type="text" #name="ngModel" class="form-control" id="name" placeholder="product Name">
+                      <div class="alert alert-danger small" *ngIf="name.touched && !name.valid">
+                        <div *ngIf="name.errors.required">product Name is required.</div>      
+                        <div *ngIf="name.errors.minlength">product Name is minimum {{ name.errors.minlength.requiredLength }} characters.</div>          
+                        <div *ngIf="name.errors.maxlength">product Name is maximum 10 character.</div>    
+                    </div>  
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="interest" class="col-sm-3 col-form-label">Monthly Interest</label>
+                    <div class="col-sm-9">
+                      <input required ngModel name="interest" type="number" #interest="ngModel" class="form-control" id="interest" placeholder="%age of principal">
+                      <div class="alert alert-danger" *ngIf="interest.touched && !interest.valid">
+                        <div *ngIf="interest.errors.required">interest is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="handlingCharge" class="col-sm-3 col-form-label">Handling Charge</label>
+                    <div class="col-sm-9">
+                      <input required ngModel name="handlingCharge" type="number" #handlingCharge="ngModel" class="form-control" id="handlingCharge" placeholder="%age of principal">
+                      <div class="alert alert-danger" *ngIf="handlingCharge.touched && !handlingCharge.valid">
+                        <div *ngIf="handlingCharge.errors.required">handling Charge is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="insuranceRate" class="col-sm-3 col-form-label">Insurance fee</label>
+                    <div class="col-sm-9">
+                      <input required ngModel name="insuranceRate" type="number" #insuranceRate="ngModel" class="form-control" id="insuranceRate" placeholder="%age of principal">
+                      <div class="alert alert-danger" *ngIf="insuranceRate.touched && !insuranceRate.valid">
+                        <div *ngIf="insuranceRate.errors.required">insurance is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <!-- /.tab1 -->
+             <!-- tab2-->
+             <div id="tab5" class="tab">
+                  <div class="form-group row">
+                    <label for="maxAmount" class="col-sm-3 col-form-label">Max Amount</label>
+                    <div class="col-sm-9">
+                      <input required type="number" ngModel name="maxAmount" #maxAmount="ngModel" class="form-control" id="maxAmount" placeholder="">
+                      <div class="alert alert-danger" *ngIf="maxAmount.touched && !maxAmount.valid">
+                        <div *ngIf="maxAmount.errors.required">maximum Amount is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="minAmount" class="col-sm-3 col-form-label">Min Amount</label>
+                    <div class="col-sm-9">
+                      <input required type="number" ngModel name="minAmount" #minAmount="ngModel" class="form-control" id="minAmount" placeholder="">
+                      <div class="alert alert-danger" *ngIf="minAmount.touched && !minAmount.valid">
+                        <div *ngIf="minAmount.errors.required">Minimum Amount cannot be null</div>  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="maxDuration" class="col-sm-3 col-form-label">Max Duration</label>
+                    <div class="col-sm-9">
+                      <input required
+                      type="number" ngModel name="maxDuration" #maxDuration="ngModel"  class="form-control" id="maxDuration" placeholder="months">
+                      <div class="alert alert-danger" *ngIf="maxDuration.touched && !maxDuration.valid">
+                        <div *ngIf="maxDuration.errors.required">max Duration is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="minDuration" class="col-sm-3 col-form-label">Min Duration</label>
+                    <div class="col-sm-9">
+                      <input required
+                      type="number" ngModel name="minDuration" #minDuration="ngModel"  class="form-control" id="minDuration" placeholder="months">
+                      <div class="alert alert-danger" *ngIf="minDuration.touched && !minDuration.valid">
+                        <div *ngIf="minDuration.errors.required">Min Duration is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <!-- /.tab2 -->
+            <!-- tab3-->
+            <div id="tab6" class="tab">
+              <div class="form-group row">
+                <label for="maximum" class="col-sm-3 col-form-label">User Maximum</label>
+                <div class="col-sm-9">
+                  <input required  ngModel name="maximum" type="text" #maximum="ngModel" class="form-control" id="productNumber" placeholder="%age of user savings">
+                  <div class="alert alert-danger small" *ngIf="maximum.touched && !maximum.valid">
+                    <div *ngIf="maximum.errors.required">User Maximum is required.</div>      
+    
+                </div>  
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="productNumber" class="col-sm-3 col-form-label">Product Number</label>
+                <div class="col-sm-9">
+                  <input required minlength="4" maxlength="6" ngModel name="productNumber" type="text" #productNumber="ngModel" class="form-control" id="productNumber" placeholder="product number">
+                  <div class="alert alert-danger small" *ngIf="productNumber.touched && !productNumber.valid">
+                    <div *ngIf="productNumber.errors.required">product number is required.</div>      
+                    <div *ngIf="productNumber.errors.minlength">product number is minimum {{ productNumber.errors.minlength.requiredLength }} characters.</div>          
+                    <div *ngIf="productNumber.errors.maxlength">product number is maximum 6 character.</div>    
+                </div>  
+                </div>
+              </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-sm-3 col-form-label">Description</label>
+                    <div class="col-sm-9">
+                        <textarea required ngModel name="description" #description="ngModel" class="form-control" id="description" rows="4"></textarea>
+                    
+                      <div class="alert alert-danger" *ngIf="description.touched && !description.valid">
+                        <div *ngIf="description.errors.required">description cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+                <!-- /.tab3 -->
+
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <div style="float:left;">
+            <button *ngIf="prevBtn" type="button" class="btn btn-secondary" (click)="prevTab()">Previous</button>
+            </div>
+            <div style="float:right;">
+            <button *ngIf="nextBtn" type="button" id="nextBtn" class="btn btn-primary" (click)="nextTab()">Next</button>
+            <button *ngIf="submitBtn" class="btn btn-primary" type="submit" id="submitBtn" [disabled]="!productForm.valid">Submit</button>
+           </div>
+
+            <!-- Circles which indicates the steps of the form: -->
+             <div style="text-align:center;margin-top:10px;">
+                <span id="step1" class="step" ></span>
+                <span id="step2" class="step"></span>
+                <span id="step3" class="step"></span>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+
+
+

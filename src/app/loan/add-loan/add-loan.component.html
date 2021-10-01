@@ -1,0 +1,201 @@
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Add new Loan</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a routerLink="clients/add">Loans</a></li>
+                <li class="breadcrumb-item active">add</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      
+
+      <div class="row">
+      <div class="col-md-3"> </div>
+      <div class="col-md-6">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 id="formTitle" class="card-title">Loan Details</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form #loanForm="ngForm" (ngSubmit)="submit(loanForm.value); loanForm.reset()">
+          <div class="card-body">
+              <!-- tab1 -->
+            <div id="ltab1" class="tab">
+                <div class="form-group row">
+                    <label for="borrower" class="col-sm-3 col-form-label">Borrower</label>
+                    <div class="col-sm-9">   
+              <input required type="text" class="form-control" list="borrowerList"  name="borrower" [(ngModel)]='currentBorrower' (change)="onBorrowerChanged(currentBorrower)" />
+                  <datalist id="borrowerList">
+                      <option *ngFor="let borrower of borrowers" [value]="borrower.userName">{{borrower.personDto.lastName}} {{borrower.personDto.firstName}}</option>
+                  </datalist>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="productId" class="col-sm-3 col-form-label">Product</label>
+                    <div class="col-sm-9">
+                      <select  required ngModel name="productId" #productId="ngModel" class="form-control" id="productId" >
+                        <option disabled value="">select...</option>
+                        <option *ngFor="let product of products"  [value]=product.id>{{product.name}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="productId.touched && !productId.valid">
+                          <div *ngIf="productId.errors.required">product cannot be empty</div> 
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="principal" class="col-sm-3 col-form-label">Principal</label>
+                    <div class="col-sm-9">
+                      <input required ngModel name="principal" type="number" #principal="ngModel" class="form-control" id="principal" placeholder="amount">
+                      <div class="alert alert-danger" *ngIf="principal.touched && !principal.valid">
+                        <div *ngIf="principal.errors.required">principal is required.</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    
+                    <label for="duration" class="col-sm-3 col-form-label">Duration</label>
+                    <div class="col-sm-4">
+                      <input required  ngModel name="duration" type="number" #duration="ngModel" class="form-control" id="duration" placeholder="Months">
+                      <div class="alert alert-danger" *ngIf="duration.touched && !duration.valid">
+                        <div *ngIf="duration.errors.required">duration is required.</div> 
+                      </div>
+                    </div>
+                      <div class="col-sm-4">
+                        <input required  ngModel name="durationWeeks" type="number" #durationWeeks="ngModel" class="form-control" id="durationWeeks" placeholder="weeks">
+                        <div class="alert alert-danger" *ngIf="durationWeeks.touched && !durationWeeks.valid">
+                          <div *ngIf="durationWeeks.errors.required">duration is required.</div> 
+                        </div>
+                      </div>
+                    
+ 
+                  </div>
+        
+            </div>
+            <!-- /.tab1 -->
+             <!-- tab2-->
+             <div id="ltab2" class="tab">
+                <div class="form-group row">
+                    <label for="repaymentCycle" class="col-sm-5 col-form-label">Repayment Cycle</label>
+                    <div class="col-sm-7">
+                      <select required ngModel name="repaymentCycle" #repaymentCycle="ngModel" class="form-control" id="repaymentCycle" >
+                        <option disabled value="">select </option>
+                        <option value="DAILY">DAILY</option>
+                        <option value="WEEKLY">WEEKLY</option>
+                        <option value="BIWEEKLY">BI-WEEKLY</option>
+                        <option value="MONTHLY">MONTHLY</option>
+                        <option value="YEARLY">YEARLY</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="repaymentCycle.touched && !repaymentCycle.valid">
+                          <div *ngIf="repaymentCycle.errors.required">repaymentCycle cannot be empty</div> 
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="firstRepaymentDate" class="col-sm-5 col-form-label">First Repayment Date</label>
+                    <div class="col-sm-7">
+                      <input required pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
+                      type="date" ngModel name="firstRepaymentDate" #firstRepaymentDate="ngModel"  class="form-control" id="firstRepaymentDate">
+                      <div class="alert alert-danger" *ngIf="firstRepaymentDate.touched && !firstRepaymentDate.valid">
+                        <div *ngIf="firstRepaymentDate.errors.required">date is required.</div> 
+                        <div *ngIf="firstRepaymentDate.errors.pattern">incorrect date format.</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="remarks" class="col-sm-3 col-form-label">Remarks</label>
+                    <div class="col-sm-9">
+                        <textarea required ngModel name="remarks" #remarks="ngModel" class="form-control" id="remarks" rows="4"></textarea>
+                    
+                      <div class="alert alert-danger" *ngIf="remarks.touched && !remarks.valid">
+                        <div *ngIf="remarks.errors.required">remarks cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+            <!-- /.tab2 -->
+            <!-- tab3-->
+            <div id="ltab3" class="tab">
+                  <div class="form-group row">
+                    <label for="borrower" class="col-sm-3 col-form-label">Guarantor</label>
+                    <div class="col-sm-9">     
+              <input type="text" class="form-control" list="guarantorList" name="guarantor" [(ngModel)]='currentGuarantor' (change)="onBorrowerChanged(currentBorrower)" />
+                  <datalist id="guarantorList">
+                    
+                      <option *ngFor="let borrower of borrowers" [value]="borrower.userName">{{borrower.personDto.lastName}} {{borrower.personDto.firstName}}</option>
+                    
+                  </datalist>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="file" class="col-sm-3 col-form-label">File</label>
+                    <div class="col-sm-9">
+                      <input required type="text" ngModel name="file" #file="ngModel" class="form-control" id="file" placeholder="file">
+                      <div class="alert alert-danger" *ngIf="file.touched && !file.valid">
+                        <div *ngIf="file.errors.required">file cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="form-group row">
+                    <label for="description" class="col-sm-3 col-form-label">Description</label>
+                    <div class="col-sm-9">
+                        <textarea required  ngModel name="description" #description="ngModel" class="form-control" id="description" rows="4"></textarea>
+                    
+                      <div class="alert alert-danger" *ngIf="description.touched && !description.valid">
+                        <div *ngIf="description.errors.required">description cannot be empty</div> 
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /.tab3 -->
+
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <div style="float:left;">
+            <button *ngIf="prevBtn" type="button" class="btn btn-secondary" (click)="prevTab()">Previous</button>
+            </div>
+            <div style="float:right;">
+            <button *ngIf="nextBtn" type="button" id="nextBtn" class="btn btn-primary" (click)="nextTab()">Next</button>
+            <button *ngIf="submitBtn" class="btn btn-primary" type="submit" id="submitBtn" [disabled]="!loanForm.valid">Submit</button>
+           </div>
+
+            <!-- Circles which indicates the steps of the form: -->
+             <div style="text-align:center;margin-top:10px;">
+                <span id="step1" class="step" ></span>
+                <span id="step2" class="step"></span>
+                <span id="step3" class="step"></span>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+
+

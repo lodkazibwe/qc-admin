@@ -1,0 +1,145 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Loan Details</h1>
+            </div><!-- /.col -->
+            
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <div *ngIf="loan"> 
+      
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="true">Repayments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Transactions</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-one-tabContent">
+                    
+                    <div class="tab-pane fade active show" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+                      <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Paid</th>
+                              <th>Balance</th>
+                            </tr>
+                          </thead>
+                           <tbody>
+                            <tr *ngFor="let repayment of repayments">
+                              <td>{{repayment.date}}</td>
+                              <td>{{repayment.amount}}</td>
+                              <td>{{repayment.paid}}</td>
+                              <td>{{repayment.balance}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div> 
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                      <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>User</th>
+                              <th>Date</th>
+                              <th>Amount</th> 
+                              <th>Narrative</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                           <tbody>
+                            <tr *ngFor="let transaction of transactions">
+                              <td>{{transaction.userName}}</td>
+                              <td>{{transaction.date}}</td>
+                              <td>{{transaction.amount}}</td>
+                              <td>{{transaction.narrative}}</td>
+                              <td>{{transaction.status}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div> 
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+
+              <div class="col-md-4">
+      <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+
+        <h3 class="profile-username text-center">#LOAN{{loan.id}} </h3>
+        <p class="text-muted text-center">Total Due | {{loan.totalDue}}</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item">
+            <b>principal</b> <a class="float-right">{{loan.principal}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>interest</b> <a class="float-right">{{loan.interest}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>paid</b> <a class="float-right">{{loan.totalPaid}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>penalty</b> <a class="float-right">{{loan.penalty}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="client"> 
+    <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+
+        <h3 class="profile-username text-center">Borrower </h3>
+        <p class="text-muted text-center">{{client.personDto.firstName}} {{client.personDto.lastName}}</p>
+         
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item">
+            <b>Residance</b> <a class="float-right">{{client.personDto.residence}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Contact</b> <a class="float-right">{{client.userName}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Work Station</b> <a class="float-right">{{client.workDto.workStation}}</a>
+          </li>
+          <li class="list-group-item">
+            <b>email</b> <a class="float-right">{{client.personDto.email}}</a>
+          </li>
+        </ul>
+      </div>
+    </div></div>
+  
+  </div>
+      
+      </div>
+      </div>
+      </section>
+
+    </div>
+</div>

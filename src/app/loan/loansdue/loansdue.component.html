@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Loans Due</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 180px;">
+                  <input type="date" name="table_search" class="form-control float-right" name="dueDate" [(ngModel)]='dueDate' (change)="onDateChanged()">
+                </div>
+              </div>
+              
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+    
+      <div class="row">
+
+        <div class="col-1"></div>
+        <div class="col-10">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Loans Due</h3>
+    
+              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Loan No.</th>
+                    <th>Product</th>
+                    <th>Borrower</th>
+                    <th>Principal</th>
+                    <th>Interest</th>
+                    <th>Paid</th>
+                    <th>Balance</th>
+                    <th>Penalty</th>
+                    <th>Due</th>
+                    <!--<th>Next Due</th>
+                    <th>Next due date</th>-->
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let loan of loans">
+                    <td>{{loan.loanNumber}}</td>
+                    <td>{{loan.product}}</td>
+                    <td>{{loan.borrower}}</td>
+                    <td>{{loan.principal}}</td>
+                    <td>{{loan.interest}}</td>
+                    <td>{{loan.totalPaid}}</td>
+                    <td>{{loan.totalBalance}}</td>
+                    <td>{{loan.penalty}}</td>
+                    <td>{{loan.due}}</td>
+                    <!--<td>{{loan.nextDue}}</td>
+                    <td>{{loan.nextDueDate}}</td>-->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          
+        </div>
+      </div>
+    
+    
+    </div>
+    
+    
